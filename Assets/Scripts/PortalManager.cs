@@ -21,17 +21,19 @@ public class PortalManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (MakePortal(portalLeft, ref m_currentLeft))
+            if (MakePortal(portalLeft, ref m_currentLeft) && m_currentRight != null)
             {
-
+                m_currentLeft.GetComponent<PortalBehaviour>().SetOtherPortal(m_currentRight);
+                m_currentRight.GetComponent<PortalBehaviour>().SetOtherPortal(m_currentLeft);
             }
         }
 
         if (Input.GetMouseButtonDown(1))
         {
-            if (MakePortal(portalRight, ref m_currentRight))
+            if (MakePortal(portalRight, ref m_currentRight) && m_currentLeft != null)
             {
-
+                m_currentRight.GetComponent<PortalBehaviour>().SetOtherPortal(m_currentLeft);
+                m_currentLeft.GetComponent<PortalBehaviour>().SetOtherPortal(m_currentRight);
             }
         }
     }
