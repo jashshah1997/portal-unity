@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    public CharacterController controller;
+    public Rigidbody rigidBody;
 
     [Header("Movement Properties")] 
     public float maxSpeed = 10.0f;
@@ -21,7 +21,7 @@ public class PlayerBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        rigidBody = GetComponent<Rigidbody>();
     }
     
     // Update is called once per frame
@@ -29,25 +29,19 @@ public class PlayerBehaviour : MonoBehaviour
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundRadius, groundMask);
 
-        if (isGrounded && velocity.y < 0.0f)
-        {
-            velocity.y = -2.0f;
-        }
-
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * z;
-        controller.Move(move * maxSpeed * Time.deltaTime);
+        if (isGrounded)
+        {
+            rigidBody.velocity = new Vector3(move.x * 10, rigidBody.velocity.y, move.z * 10);
+        }
 
         if (Input.GetButton("Jump") && isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+            rigidBody.AddForce(Vector3.up * 10, ForceMode.Impulse);
         }
-
-        velocity.y += gravity * Time.deltaTime;
-
-        controller.Move(velocity * Time.deltaTime);
     }
 
     void OnDrawGizmos()

@@ -29,10 +29,16 @@ public class PortalBehaviour : MonoBehaviour
         Debug.Log(col.transform.tag);
         if (col.transform.CompareTag("Player") && m_otherPortal != null)
         {
-            col.gameObject.GetComponent<CharacterController>().enabled = false;
-            col.gameObject.transform.position = m_otherPortal.transform.position - Quaternion.Euler(0, 90, 0) * m_otherPortal.transform.forward * 1.5f;
+            var relPoint = transform.InverseTransformPoint(col.transform.position);
+            var relVelocity = -transform.InverseTransformDirection(col.GetComponent<Rigidbody>().velocity);
+
+            col.GetComponent<Rigidbody>().velocity = m_otherPortal.transform.TransformDirection(relVelocity);
+            col.transform.position = m_otherPortal.transform.TransformPoint(relPoint) + (col.GetComponent<Rigidbody>().velocity.normalized * 1.5f);
             col.gameObject.transform.forward = m_otherPortal.transform.up;
-            col.gameObject.GetComponent<CharacterController>().enabled = true;
+
+            // col.gameObject.transform.position = m_otherPortal.transform.position - Quaternion.Euler(0, 90, 0) * m_otherPortal.transform.forward * 1.5f;
+
+            // col.gameObject.GetComponent<Rigidbody>().velocity = 
         }
     }
 }
