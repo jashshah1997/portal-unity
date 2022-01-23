@@ -7,10 +7,8 @@ public class PlayerBehaviour : MonoBehaviour
     public Rigidbody rigidBody;
 
     [Header("Movement Properties")] 
-    public float maxSpeed = 10.0f;
-    public float gravity = -30.0f;
-    public float jumpHeight = 3.0f;
-    public Vector3 velocity;
+    public float MovementMultiplier = 10.0f;
+    public float JumpMultiplier = 10f;
 
     [Header("Ground Detection Properties")]
     public Transform groundCheck;
@@ -35,12 +33,12 @@ public class PlayerBehaviour : MonoBehaviour
         Vector3 move = transform.right * x + transform.forward * z;
         if (isGrounded)
         {
-            rigidBody.velocity = new Vector3(move.x * 10, rigidBody.velocity.y, move.z * 10);
+            rigidBody.velocity = new Vector3(move.x * MovementMultiplier, rigidBody.velocity.y, move.z * MovementMultiplier);
         }
 
         if (Input.GetButton("Jump") && isGrounded)
         {
-            rigidBody.AddForce(Vector3.up * 10, ForceMode.Impulse);
+            rigidBody.AddForce(Vector3.up * JumpMultiplier, ForceMode.Impulse);
         }
     }
 

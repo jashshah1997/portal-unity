@@ -5,6 +5,7 @@ using UnityEngine;
 public class PortalBehaviour : MonoBehaviour
 {
     private GameObject m_otherPortal = null;
+    public float PortalOffset = 1.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -33,12 +34,7 @@ public class PortalBehaviour : MonoBehaviour
             var relVelocity = -transform.InverseTransformDirection(col.GetComponent<Rigidbody>().velocity);
 
             col.GetComponent<Rigidbody>().velocity = m_otherPortal.transform.TransformDirection(relVelocity);
-            col.transform.position = m_otherPortal.transform.TransformPoint(relPoint) + (col.GetComponent<Rigidbody>().velocity.normalized * 1.5f);
-            col.gameObject.transform.forward = m_otherPortal.transform.up;
-
-            // col.gameObject.transform.position = m_otherPortal.transform.position - Quaternion.Euler(0, 90, 0) * m_otherPortal.transform.forward * 1.5f;
-
-            // col.gameObject.GetComponent<Rigidbody>().velocity = 
-        }
+            col.transform.position = m_otherPortal.transform.TransformPoint(relPoint) + (col.GetComponent<Rigidbody>().velocity.normalized * PortalOffset);
+            col.gameObject.transform.forward = m_otherPortal.transform.up;        }
     }
 }
