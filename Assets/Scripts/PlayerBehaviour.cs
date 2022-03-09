@@ -40,6 +40,9 @@ public class PlayerBehaviour : MonoBehaviour
         {
             rigidBody.AddForce(Vector3.up * JumpMultiplier, ForceMode.Impulse);
         }
+
+        Quaternion q = Quaternion.FromToRotation(transform.up, Vector3.up) * transform.rotation;
+        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * 3.5f);
     }
 
     void OnDrawGizmos()

@@ -33,8 +33,10 @@ public class PortalBehaviour : MonoBehaviour
             var relPoint = transform.InverseTransformPoint(col.transform.position);
             var relVelocity = -transform.InverseTransformDirection(col.GetComponent<Rigidbody>().velocity);
 
-            col.GetComponent<Rigidbody>().velocity = m_otherPortal.transform.TransformDirection(relVelocity);
+            col.GetComponent<Rigidbody>().velocity = Vector3.Project(m_otherPortal.transform.TransformDirection(relVelocity), m_otherPortal.transform.up);
+           
             col.transform.position = m_otherPortal.transform.TransformPoint(relPoint) + (col.GetComponent<Rigidbody>().velocity.normalized * PortalOffset);
-            col.gameObject.transform.forward = m_otherPortal.transform.up;        }
+            col.gameObject.transform.forward = m_otherPortal.transform.up;
+        }
     }
 }

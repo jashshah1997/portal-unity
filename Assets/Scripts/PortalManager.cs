@@ -59,6 +59,16 @@ public class PortalManager : MonoBehaviour
         Vector3 position = hit.point;
         Quaternion rotation = Quaternion.LookRotation(hit.normal);
 
+        if (m_currentLeft && m_currentLeft != current && Vector3.Distance(position, m_currentLeft.transform.position) < 1.5)
+        {
+            return false;
+        }
+
+        if (m_currentRight && m_currentRight != current && Vector3.Distance(position, m_currentRight.transform.position) < 1.5)
+        {
+            return false;
+        }
+
         if (current)
         {
             Destroy(current);
