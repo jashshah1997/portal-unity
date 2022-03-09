@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     public Rigidbody rigidBody;
+    public Transform startPosition;
 
     [Header("Movement Properties")] 
     public float MovementMultiplier = 10.0f;
@@ -20,6 +21,7 @@ public class PlayerBehaviour : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        startPosition = GameObject.Find("StartPosition").transform;
     }
     
     // Update is called once per frame
@@ -43,6 +45,8 @@ public class PlayerBehaviour : MonoBehaviour
 
         Quaternion q = Quaternion.FromToRotation(transform.up, Vector3.up) * transform.rotation;
         transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * 3.5f);
+
+        if (gameObject.transform.position.y < -40f) { gameObject.transform.position = startPosition.transform.position; }
     }
 
     void OnDrawGizmos()
