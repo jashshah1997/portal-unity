@@ -6,7 +6,6 @@ public class PortalBehaviour : MonoBehaviour
 {
     private GameObject m_otherPortal = null;
     public float PortalOffset = 1.5f;
-    private bool colHappened = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,13 +25,6 @@ public class PortalBehaviour : MonoBehaviour
         m_otherPortal = obj;
     }
 
-    private void OnTriggerExit(Collider col)
-    {
-        if (col.transform.CompareTag("Player") && m_otherPortal != null)
-        {
-            colHappened = false;
-        }
-    }
 
     void OnTriggerEnter(Collider col)
     {
@@ -40,17 +32,17 @@ public class PortalBehaviour : MonoBehaviour
         Debug.Log(col.transform.tag);
         if (col.transform.CompareTag("Player") && m_otherPortal != null)
         {
-            if (colHappened)
-            {
-                return;
-            }
 
-            colHappened = true;
             var relPoint = transform.InverseTransformPoint(col.transform.position);
             var relVelocity = -transform.InverseTransformDirection(col.GetComponent<Rigidbody>().velocity);
 
-            col.GetComponent<Rigidbody>().velocity = Vector3.Project(m_otherPortal.transform.TransformDirection(relVelocity), m_otherPortal.transform.up);
-           
+            var newVel = Vector3.Project(m_otherPortal.transform.TransformDirection(relVelocity), m_otherPortal.transform.up);
+            if (Vector3.Dot(new Vector3(newVel.x, newVel.y, newVel.z), m_otherPortal.transform.up) < 0)
+            {
+                newVel *= -1;
+            }
+
+            col.GetComponent<Rigidbody>().velocity = newVel;
             col.transform.position = m_otherPortal.transform.TransformPoint(relPoint) + (col.GetComponent<Rigidbody>().velocity.normalized * PortalOffset);
             col.gameObject.transform.forward = m_otherPortal.transform.up;
         }
