@@ -6,6 +6,7 @@ public class PortalBehaviour : MonoBehaviour
 {
     private GameObject m_otherPortal = null;
     public float PortalOffset = 1.5f;
+    private bool colHappened = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,11 +26,26 @@ public class PortalBehaviour : MonoBehaviour
         m_otherPortal = obj;
     }
 
+    private void OnTriggerExit(Collider col)
+    {
+        if (col.transform.CompareTag("Player") && m_otherPortal != null)
+        {
+            colHappened = false;
+        }
+    }
+
     void OnTriggerEnter(Collider col)
     {
+        
         Debug.Log(col.transform.tag);
         if (col.transform.CompareTag("Player") && m_otherPortal != null)
         {
+            if (colHappened)
+            {
+                return;
+            }
+
+            colHappened = true;
             var relPoint = transform.InverseTransformPoint(col.transform.position);
             var relVelocity = -transform.InverseTransformDirection(col.GetComponent<Rigidbody>().velocity);
 
