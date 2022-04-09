@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1983144298988167721}
   - component: {fileID: 5288302210264233152}
   - component: {fileID: 4962392700090569158}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mirror
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 2610328143481745256}
   - component: {fileID: 2610328143481745255}
   - component: {fileID: 9087475723233884276}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PortalLeft
   m_TagString: PortalLeft
   m_Icon: {fileID: 0}
@@ -207,7 +207,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1455374776127764336}
   - component: {fileID: 8637924819875664694}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}

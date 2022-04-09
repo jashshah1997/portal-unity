@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PortalManager : MonoBehaviour
 {
+    public LayerMask layerMask;
+
     public GameObject portalLeft;
     public GameObject portalRight;
 
@@ -42,7 +44,7 @@ public class PortalManager : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        bool success = Physics.Raycast(ray, out hit);
+        bool success = Physics.Raycast(ray, out hit, 1000f, ~layerMask);
 
         // Check for hit
         if (!success)
@@ -53,6 +55,7 @@ public class PortalManager : MonoBehaviour
         // Check for portal surface tag
         if (!hit.transform.gameObject.CompareTag("PortalSurface"))
         {
+            Debug.Log(hit.transform.gameObject.tag);
             return false;
         }
 
@@ -61,11 +64,13 @@ public class PortalManager : MonoBehaviour
 
         if (m_currentLeft && m_currentLeft != current && Vector3.Distance(position, m_currentLeft.transform.position) < 1.5)
         {
+            Debug.Log("Left rejected");
             return false;
         }
 
         if (m_currentRight && m_currentRight != current && Vector3.Distance(position, m_currentRight.transform.position) < 1.5)
         {
+            Debug.Log("Right rejected");
             return false;
         }
 

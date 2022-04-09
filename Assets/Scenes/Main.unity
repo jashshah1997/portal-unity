@@ -1468,6 +1468,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2c1c359413f6f47adc2cadcc0ca3d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
   portalLeft: {fileID: 2610328143481745253, guid: b0d7686b3dc268b4292759e6c775d512, type: 3}
   portalRight: {fileID: 5312802125617999386, guid: 4d5f699f95b5391498447fbb3ad97b6f, type: 3}
 --- !u!54 &1867773746
