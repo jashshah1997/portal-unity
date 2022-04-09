@@ -13,6 +13,8 @@ public class PauseMenuController : MonoBehaviour
     private TextMeshProUGUI m_titleText;
     private TextMeshProUGUI m_scoreText;
 
+    private GameManager m_gameManager;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -27,6 +29,7 @@ public class PauseMenuController : MonoBehaviour
 
         m_titleText = GameObject.Find("TitleText").GetComponent<TextMeshProUGUI>();
         m_scoreText = GameObject.Find("ScoreText").GetComponent<TextMeshProUGUI>();
+        m_gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
  
@@ -47,7 +50,8 @@ public class PauseMenuController : MonoBehaviour
 
     private void onResumeButtonClicked()
     {
-        Debug.Log("Resume button");
+        m_gameManager.TogglePause();
+        m_gameManager.TogglePauseMenu();
     }
 
     private void onNextLevelButtonClicked()

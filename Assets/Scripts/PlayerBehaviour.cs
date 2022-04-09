@@ -57,7 +57,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Hiho" + other.gameObject.tag);
         if (other.gameObject.CompareTag("FinishLine"))
         {
             GameObject.Find("GameManager").GetComponent<GameManager>().SetLevelFinished();

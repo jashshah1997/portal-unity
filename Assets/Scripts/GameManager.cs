@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             TogglePause();
-            TogglePauseMenu(!m_gamePaused);
+            TogglePauseMenu();
             if (m_gamePaused)
             {
                 m_pausePanel.GetComponent<PauseMenuController>().SetPauseMenu();
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     {
         m_level_finished = true;
         PauseGame();
-        TogglePauseMenu(!m_gamePaused);
+        TogglePauseMenu();
         m_pausePanel.GetComponent<PauseMenuController>().SetLevelFinished((int)m_currentTime);
     }
 
@@ -68,13 +68,13 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public void TogglePauseMenu(bool state)
+    public void TogglePauseMenu()
     {
-        m_gamePaused = state;
-        m_crosshair.SetActive(!state);
-        m_pausePanel.SetActive(state);
+        m_gamePaused = !m_gamePaused;
+        m_crosshair.SetActive(!m_gamePaused);
+        m_pausePanel.SetActive(m_gamePaused);
 
-        if (state)
+        if (m_gamePaused)
         {
             Cursor.lockState = CursorLockMode.None;
         }
