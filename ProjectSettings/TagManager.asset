@@ -8,6 +8,7 @@ TagManager:
   - PortalWall
   - PortalLeft
   - PortalRight
+  - FinishLine
   layers:
   - Default
   - TransparentFX

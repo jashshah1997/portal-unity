@@ -54,4 +54,13 @@ public class PlayerBehaviour : MonoBehaviour
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Hiho" + other.gameObject.tag);
+        if (other.gameObject.CompareTag("FinishLine"))
+        {
+            GameObject.Find("GameManager").GetComponent<GameManager>().SetLevelFinished();
+        }
+    }
 }

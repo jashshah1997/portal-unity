@@ -14,7 +14,7 @@ public class PauseMenuController : MonoBehaviour
     private TextMeshProUGUI m_scoreText;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         m_resumeButton = GameObject.Find("ResumeButton").GetComponent<Button>();
         m_resumeButton.onClick.AddListener(onResumeButtonClicked);
@@ -29,6 +29,7 @@ public class PauseMenuController : MonoBehaviour
         m_scoreText = GameObject.Find("ScoreText").GetComponent<TextMeshProUGUI>();
     }
 
+ 
     public void SetPauseMenu()
     {
         m_titleText.text = "Pause Menu";
@@ -39,7 +40,7 @@ public class PauseMenuController : MonoBehaviour
     public void SetLevelFinished(int score)
     {
         m_titleText.text = "Level Finished";
-        m_scoreText.text = "Score: " + score;
+        m_scoreText.text = "Elapsed time: " + score;
         m_nextLevelButton.gameObject.SetActive(true);
         m_resumeButton.gameObject.SetActive(false);
     }
