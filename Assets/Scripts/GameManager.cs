@@ -27,9 +27,7 @@ public class GameManager : MonoBehaviour
         m_crosshair.SetActive(true);
         m_pausePanel.SetActive(false);
 
-        ScoreManager.Instance.SaveGame(1, 10);
-        ScoreManager.Instance.SaveGame(1, 20);
-        ScoreManager.Instance.SaveGame(2, 23);
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -56,7 +54,7 @@ public class GameManager : MonoBehaviour
         m_level_finished = true;
         PauseGame();
         TogglePauseMenu();
-        m_pausePanel.GetComponent<PauseMenuController>().SetLevelFinished((int)m_currentTime);
+        m_pausePanel.GetComponent<PauseMenuController>().SetLevelFinished((int)m_currentTime, LevelId + 1);
         ScoreManager.Instance.SaveGame(LevelId, (int)m_currentTime);
     }
 

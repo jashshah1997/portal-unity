@@ -37,7 +37,7 @@ public class HighscoresController : MonoBehaviour
 
     private void onNextButton()
     {
-        if (m_levelID == 4) return;
+        if (m_levelID == 3) return;
         RefreshScoreEntries(m_levelID + 1);
     }
 
@@ -61,6 +61,8 @@ public class HighscoresController : MonoBehaviour
 
         for (int i = 0; i < scores.Count; i++)
         {
+            if (i > 9) break;
+
             var newEntry = Instantiate(m_entryTemplate, m_scoresContainer.transform);
             var rectTransform = newEntry.GetComponent<RectTransform>();
             rectTransform.anchoredPosition = new Vector2(0, -(i + 2.5f) * rectTransform.rect.height);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class PauseMenuController : MonoBehaviour
     private TextMeshProUGUI m_scoreText;
 
     private GameManager m_gameManager;
+
+    private int m_nextLevelId = 1;
 
     // Start is called before the first frame update
     void Awake()
@@ -40,12 +43,13 @@ public class PauseMenuController : MonoBehaviour
         m_resumeButton.gameObject.SetActive(true);
     }
 
-    public void SetLevelFinished(int score)
+    public void SetLevelFinished(int score, int nextLevelId)
     {
-        m_titleText.text = "Level Finished";
+        m_titleText.text = "Level " + (nextLevelId - 1) +  " Finished";
         m_scoreText.text = "Elapsed time: " + score;
         m_nextLevelButton.gameObject.SetActive(true);
         m_resumeButton.gameObject.SetActive(false);
+        m_nextLevelId = nextLevelId;
     }
 
     private void onResumeButtonClicked()
@@ -56,18 +60,12 @@ public class PauseMenuController : MonoBehaviour
 
     private void onNextLevelButtonClicked()
     {
-        Debug.Log("Next level");
+        SceneManager.LoadScene("Level" + m_nextLevelId);
     }
 
     private void onBackToMainMenuClicked()
     {
-        Debug.Log("Main menu");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        SceneManager.LoadScene("MainMenu");
     }
 
 }
