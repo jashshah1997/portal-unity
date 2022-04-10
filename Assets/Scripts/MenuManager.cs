@@ -42,6 +42,7 @@ public class MenuManager : MonoBehaviour
     {
         m_mainMenuPanel.SetActive(false);
         m_highscoresPanel.SetActive(true);
+        m_highscoresPanel.GetComponent<HighscoresController>().RefreshScoreEntries(1);
     }
 
     void onExit()
