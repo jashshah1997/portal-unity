@@ -5,6 +5,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public static readonly int MAX_LEVEL = 3;
     public int LevelId;
 
     private TextMeshProUGUI m_timerText;

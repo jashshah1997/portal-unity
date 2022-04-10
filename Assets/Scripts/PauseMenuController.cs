@@ -47,7 +47,14 @@ public class PauseMenuController : MonoBehaviour
     {
         m_titleText.text = "Level " + (nextLevelId - 1) +  " Finished";
         m_scoreText.text = "Elapsed time: " + score;
-        m_nextLevelButton.gameObject.SetActive(true);
+        if (nextLevelId <= GameManager.MAX_LEVEL)
+        {
+            m_nextLevelButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            m_nextLevelButton.gameObject.SetActive(false);
+        }
         m_resumeButton.gameObject.SetActive(false);
         m_nextLevelId = nextLevelId;
     }
@@ -69,3 +76,4 @@ public class PauseMenuController : MonoBehaviour
     }
 
 }
+

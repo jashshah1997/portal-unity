@@ -37,7 +37,7 @@ public class HighscoresController : MonoBehaviour
 
     private void onNextButton()
     {
-        if (m_levelID == 3) return;
+        if (m_levelID == GameManager.MAX_LEVEL) return;
         RefreshScoreEntries(m_levelID + 1);
     }
 
