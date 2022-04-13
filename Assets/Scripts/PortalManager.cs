@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PortalManager : MonoBehaviour
 {
+    public AudioSource gunSound;
     public LayerMask layerMask;
 
     public GameObject portalLeft;
@@ -80,7 +81,7 @@ public class PortalManager : MonoBehaviour
         }
 
         current = Instantiate(portal, position, rotation * Quaternion.Euler(0, 90, 90));
-
+        gunSound.Play();
         return true;
     }
 }
